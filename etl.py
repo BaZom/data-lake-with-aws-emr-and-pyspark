@@ -15,6 +15,14 @@ os.environ['AWS_SECRET_ACCESS_KEY']=config['AWS_SECRET_ACCESS_KEY']
 
 
 def create_spark_session():
+    """ creates a spark session
+           
+    Args:
+        no Args
+        
+    Returns:
+        returns an object of the sparkSession
+    """    
     spark = SparkSession \
         .builder \
         .config("spark.jars.packages", "org.apache.hadoop:hadoop-aws:2.7.0") \
@@ -23,6 +31,16 @@ def create_spark_session():
 
 
 def process_song_data(spark, input_data, output_data):
+    """ reads song data from files in an input source into dataframes, which are saved as parquet files in an output destination  
+           
+    Args:
+        spark (obj): object of SparkSession
+        input_data (str): path of the source data
+        output_data (str): path of the output destintaion 
+        
+    Returns:
+        no return values
+    """ 
     # get filepath to song data file
     song_data = input_data + 'song_data/*/*/*/'
     
@@ -42,6 +60,16 @@ def process_song_data(spark, input_data, output_data):
     artists_table.write.mode('overwrite').parquet("output/artists.parquet", partitionBy=['artist_id'])
 
 def process_log_data(spark, input_data, output_data):
+    """ reads log data from files in an input source into dataframes, which are saved as parquet files in an output destination  
+           
+    Args:
+        spark (obj): object of SparkSession
+        input_data (str): path of the source data
+        output_data (str): path of the output destintaion 
+        
+    Returns:
+        no return values
+    """     
     # get filepath to log data file
     log_data = input_data + 'log_data'
 
@@ -99,6 +127,14 @@ def process_log_data(spark, input_data, output_data):
     songplays_table.show()
 
 def main():
+    """ calls create_spark_session, prcess_song_data and process_log_data. Also defines the paths of the input data and output destination
+           
+    Args:
+        No Args
+        
+    Returns:
+        no return values
+    """     
     spark = create_spark_session()
     input_data = "s3a://udacity-dend/"
     output_data = ""
