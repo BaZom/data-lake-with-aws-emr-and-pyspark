@@ -1,4 +1,5 @@
 # Data-Lake-with-AWS-EMR-and-PySpark
+Data lake project submission for Udacity Data Engineer for AI Applications Nanodegree
 
 ## Introduction
 This project aims to extract songs metadata and user activity data from JSON  files residing in an AWS S3 bucket using aws EMR and PySpark, build a star schema with the data and save them in parquet files back into an AWS S3 bucket. 
